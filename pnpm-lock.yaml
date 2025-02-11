@@ -38,6 +38,9 @@ importers:
       npm-run-all:
         specifier: ^4.1.5
         version: 4.1.5
+      prettier:
+        specifier: ^3.5.0
+        version: 3.5.0
       typescript:
         specifier: ^5.7.3
         version: 5.7.3
@@ -1249,6 +1252,11 @@ packages:
   prelude-ls@1.2.1:
     resolution: {integrity: sha512-vkcDPrRZo1QZLbn5RLGPpg/WmIQ65qoWWhcGKf/b5eplkkarX0m9z8ppCat4mlOqUsWpyNuYgO3VRyrYHSzX5g==}
     engines: {node: '>= 0.8.0'}
+
+  prettier@3.5.0:
+    resolution: {integrity: sha512-quyMrVt6svPS7CjQ9gKb3GLEX/rl3BCL2oa/QkNcXv4YNVBC9olt3s+H7ukto06q7B1Qz46PbrKLO34PR6vXcA==}
+    engines: {node: '>=14'}
+    hasBin: true
 
   process-nextick-args@2.0.1:
     resolution: {integrity: sha512-3ouUOpQhtgrbOa17J7+uxOTpITYWaGP7/AhoR3+A+/1e9skrzelGi/dXzEYyvbxubEF6Wn2ypscTKiKJFFn1ag==}
@@ -2936,6 +2944,8 @@ snapshots:
   possible-typed-array-names@1.1.0: {}
 
   prelude-ls@1.2.1: {}
+
+  prettier@3.5.0: {}
 
   process-nextick-args@2.0.1: {}
 
