@@ -46,6 +46,12 @@
         "icon": "$(add)"
       },
       {
+        "command": "fileCollections.addActiveEditorFile",
+        "title": "Add Active File to Collection",
+        "category": "File Collections",
+        "icon": "$(new-file)"
+      },
+      {
         "command": "fileCollections.addToCollection",
         "title": "Add to Collection",
         "category": "File Collections"
@@ -67,6 +73,11 @@
       "view/item/context": [
         {
           "command": "fileCollections.openAll",
+          "when": "view == fileCollectionsView && viewItem == collection",
+          "group": "inline"
+        },
+        {
+          "command": "fileCollections.addActiveEditorFile",
           "when": "view == fileCollectionsView && viewItem == collection",
           "group": "inline"
         },

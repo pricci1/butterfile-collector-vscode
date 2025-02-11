@@ -43,6 +43,36 @@ export function registerCollectionCommands(
   );
 
   context.subscriptions.push(
+    vscode.commands.registerCommand(
+      "fileCollections.addActiveEditorFile",
+      async (item: CollectionTreeItem) => {
+        const collections = await manager.getCollections();
+        if (collections.length === 0) {
+          vscode.window.showWarningMessage("No collections exist yet. Create one first!");
+          return;
+        }
+
+        const editor = vscode.window.activeTextEditor;
+        if (!editor) {
+          vscode.window.showInformationMessage("No active editor to add.");
+          return;
+        }
+
+        const fileUri = editor?.document?.uri;
+        const selectedCollection = item.collection.name;
+
+        if (selectedCollection) {
+          await manager.addFilesToCollection(selectedCollection, [
+            vscode.workspace.asRelativePath(fileUri),
+          ]);
+          treeProvider.refresh();
+          vscode.window.showInformationMessage(`File added to collection "${selectedCollection}"`);
+        }
+      },
+    ),
+  );
+
+  context.subscriptions.push(
     vscode.commands.registerCommand("fileCollections.refresh", () => {
       treeProvider.refresh();
     }),
