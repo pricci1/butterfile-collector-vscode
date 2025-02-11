@@ -12,12 +12,77 @@
   "activationEvents": [],
   "main": "./dist/extension.js",
   "contributes": {
+    "views": {
+      "explorer": [
+        {
+          "id": "fileCollectionsView",
+          "name": "File Collections"
+        }
+      ]
+    },
     "commands": [
       {
-        "command": "file-collections.helloWorld",
-        "title": "Hello World"
+        "command": "fileCollections.newCollection",
+        "title": "New Collection",
+        "category": "File Collections",
+        "icon": "$(add)"
+      },
+      {
+        "command": "fileCollections.refresh",
+        "title": "Refresh Collections",
+        "category": "File Collections",
+        "icon": "$(refresh)"
+      },
+      {
+        "command": "fileCollections.openAll",
+        "title": "Open All Files",
+        "category": "File Collections",
+        "icon": "$(go-to-file)"
+      },
+      {
+        "command": "fileCollections.addFiles",
+        "title": "Add Files to Collection",
+        "category": "File Collections",
+        "icon": "$(add)"
+      },
+      {
+        "command": "fileCollections.addToCollection",
+        "title": "Add to Collection",
+        "category": "File Collections"
       }
-    ]
+    ],
+    "menus": {
+      "view/title": [
+        {
+          "command": "fileCollections.newCollection",
+          "when": "view == fileCollectionsView",
+          "group": "navigation"
+        },
+        {
+          "command": "fileCollections.refresh",
+          "when": "view == fileCollectionsView",
+          "group": "navigation"
+        }
+      ],
+      "view/item/context": [
+        {
+          "command": "fileCollections.openAll",
+          "when": "view == fileCollectionsView && viewItem == collection",
+          "group": "inline"
+        },
+        {
+          "command": "fileCollections.addFiles",
+          "when": "view == fileCollectionsView && viewItem == collection",
+          "group": "1_modification"
+        }
+      ],
+      "explorer/context": [
+        {
+          "command": "fileCollections.addToCollection",
+          "group": "2_workspace"
+        }
+      ]
+    }
   },
   "scripts": {
     "vscode:prepublish": "pnpm run package",
