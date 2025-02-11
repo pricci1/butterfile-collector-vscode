@@ -9,7 +9,10 @@ export class JSONStorageProvider implements StorageProvider {
       const rawData = await vscode.workspace.fs.readFile(this.getUri());
       return JSON.parse(rawData.toString()).collections;
     } catch (error: any) {
-      if (error.code === "ENOENT") return []; // File not found
+      if (error.code === "ENOENT" || error.code === "FileNotFound") {
+        await this.initializeCollectionsFile();
+        return [];
+      }
       throw new Error("Failed to parse collections file");
     }
   }
@@ -22,6 +25,19 @@ export class JSONStorageProvider implements StorageProvider {
   async validateWorkspace(): Promise<boolean> {
     const workspaceRoot = vscode.workspace.workspaceFolders?.[0];
     return !!workspaceRoot;
+  }
+
+  private async initializeCollectionsFile(): Promise<void> {
+    const defaultData = { version: 1, collections: [] };
+    const data = JSON.stringify(defaultData, null, 2);
+
+    try {
+      const vscodeFolder = vscode.Uri.joinPath(this.getUri(), "../");
+      await vscode.workspace.fs.createDirectory(vscodeFolder);
+      await vscode.workspace.fs.writeFile(this.getUri(), Buffer.from(data));
+    } catch (error) {
+      throw new Error("Failed to create collections file");
+    }
   }
 
   private getUri(): vscode.Uri {
