@@ -3,6 +3,7 @@ import { Collection } from "../storage/types";
 import { CollectionManager } from "../services/collection-manager";
 import { CollectionsTreeProvider } from "./collections-tree-provider";
 import { CollectionTreeItem } from "./tree-items";
+import { toAbsolutePath } from "../utils/path-resolver";
 
 export function registerCollectionCommands(
   context: vscode.ExtensionContext,
@@ -68,6 +69,30 @@ export function registerCollectionCommands(
           treeProvider.refresh();
           vscode.window.showInformationMessage(`File added to collection "${selectedCollection}"`);
         }
+      },
+    ),
+  );
+
+  context.subscriptions.push(
+    vscode.commands.registerCommand(
+      "fileCollections.copyPaths",
+      async (item: CollectionTreeItem) => {
+        const config = vscode.workspace.getConfiguration("fileCollections");
+        const separator = config.get<string>("pathSeparator") ?? " ";
+        const useRelativePath = config.get<boolean>("copyRelativePath") ?? true;
+
+        const paths = item.collection.files.map((file) => {
+          if (useRelativePath) {
+            return file;
+          }
+          return toAbsolutePath(file).fsPath;
+        });
+
+        const pathString = paths.join(separator);
+        await vscode.env.clipboard.writeText(pathString);
+        vscode.window.showInformationMessage(
+          `Paths from "${item.collection.name}" copied to clipboard`,
+        );
       },
     ),
   );

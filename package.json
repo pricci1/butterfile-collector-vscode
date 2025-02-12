@@ -55,6 +55,12 @@
         "command": "fileCollections.addToCollection",
         "title": "Add to Collection",
         "category": "File Collections"
+      },
+      {
+        "command": "fileCollections.copyPaths",
+        "title": "Copy Paths",
+        "category": "File Collections",
+        "icon": "$(copy)"
       }
     ],
     "menus": {
@@ -82,6 +88,11 @@
           "group": "inline"
         },
         {
+          "command": "fileCollections.copyPaths",
+          "when": "view == fileCollectionsView && viewItem == collection",
+          "group": "inline"
+        },
+        {
           "command": "fileCollections.addFiles",
           "when": "view == fileCollectionsView && viewItem == collection",
           "group": "1_modification"
@@ -93,6 +104,27 @@
           "group": "2_workspace"
         }
       ]
+    },
+    "configuration": {
+      "title": "File Collections",
+      "properties": {
+        "fileCollections.pathSeparator": {
+          "type": "string",
+          "default": " ",
+          "examples": [
+            " ",
+            ", ",
+            "| ",
+            ";"
+          ],
+          "description": "Character(s) used to separate paths when copying"
+        },
+        "fileCollections.copyRelativePath": {
+          "type": "boolean",
+          "default": true,
+          "description": "When true, copied paths will be relative to the workspace root. Otherwise, absolute paths will be used."
+        }
+      }
     }
   },
   "scripts": {
