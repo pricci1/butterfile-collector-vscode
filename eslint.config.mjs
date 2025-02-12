@@ -25,6 +25,13 @@ export default [
           format: ["camelCase", "PascalCase"],
         },
       ],
+      "@typescript-eslint/consistent-type-imports": [
+        "error",
+        {
+          fixStyle: "inline-type-imports",
+          disallowTypeAnnotations: false,
+        },
+      ],
 
       curly: ["warn", "multi-line"],
       eqeqeq: "warn",

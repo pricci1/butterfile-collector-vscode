@@ -1,8 +1,8 @@
 import * as vscode from "vscode";
-import { Collection } from "../storage/types";
-import { CollectionManager } from "../services/collection-manager";
-import { CollectionsTreeProvider } from "./collections-tree-provider";
-import { CollectionTreeItem } from "./tree-items";
+import type { Collection } from "../storage/types";
+import type { CollectionManager } from "../services/collection-manager";
+import type { CollectionsTreeProvider } from "./collections-tree-provider";
+import type { CollectionTreeItem } from "./tree-items";
 import { toAbsolutePath } from "../utils/path-resolver";
 
 export function registerCollectionCommands(

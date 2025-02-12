@@ -1,5 +1,5 @@
 import * as vscode from "vscode";
-import { Collection, StorageProvider } from "./types";
+import { type Collection, type StorageProvider } from "./types";
 
 export class JSONStorageProvider implements StorageProvider {
   private readonly COLLECTIONS_FILE = ".vscode/file-collections.json";

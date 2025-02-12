@@ -1,6 +1,6 @@
 import * as vscode from "vscode";
-import { CollectionManager } from "../services/collection-manager";
-import { CollectionsTreeProvider } from "./collections-tree-provider";
+import { type CollectionManager } from "../services/collection-manager";
+import { type CollectionsTreeProvider } from "./collections-tree-provider";
 
 export function registerExplorerIntegration(
   context: vscode.ExtensionContext,

@@ -1,6 +1,6 @@
 import * as vscode from "vscode";
-import { Collection } from "../storage/types";
-import { CollectionManager } from "../services/collection-manager";
+import { type Collection } from "../storage/types";
+import { type CollectionManager } from "../services/collection-manager";
 
 export class CollectionTreeItem extends vscode.TreeItem {
   constructor(

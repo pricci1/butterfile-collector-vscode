@@ -1,5 +1,5 @@
 import * as vscode from "vscode";
-import { CollectionManager } from "../services/collection-manager";
+import { type CollectionManager } from "../services/collection-manager";
 import { CollectionTreeItem, FileTreeItem } from "./tree-items";
 
 export class CollectionsTreeProvider implements vscode.TreeDataProvider<vscode.TreeItem> {
