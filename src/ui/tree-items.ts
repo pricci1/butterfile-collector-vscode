@@ -22,5 +22,10 @@ export class FileTreeItem extends vscode.TreeItem {
     this.iconPath = vscode.ThemeIcon.File;
     this.resourceUri = vscode.Uri.file(filePath);
     this.contextValue = "collectionFile";
+    this.command = {
+      command: "vscode.open",
+      title: "Open File",
+      arguments: [vscode.Uri.file(filePath)],
+    };
   }
 }
