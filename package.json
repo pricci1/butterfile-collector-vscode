@@ -61,6 +61,12 @@
         "title": "Copy Paths",
         "category": "File Collections",
         "icon": "$(copy)"
+      },
+      {
+        "command": "fileCollections.removeFile",
+        "title": "Remove File",
+        "category": "File Collections",
+        "icon": "$(remove)"
       }
     ],
     "menus": {
@@ -96,6 +102,11 @@
           "command": "fileCollections.addFiles",
           "when": "view == fileCollectionsView && viewItem == collection",
           "group": "1_modification"
+        },
+        {
+          "command": "fileCollections.removeFile",
+          "when": "view == fileCollectionsView && viewItem == collectionFile",
+          "group": "inline"
         }
       ],
       "explorer/context": [

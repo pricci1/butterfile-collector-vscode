@@ -2,7 +2,7 @@ import * as vscode from "vscode";
 import type { Collection } from "../storage/types";
 import type { CollectionManager } from "../services/collection-manager";
 import type { CollectionsTreeProvider } from "./collections-tree-provider";
-import type { CollectionTreeItem } from "./tree-items";
+import type { CollectionTreeItem, FileTreeItem } from "./tree-items";
 import { toAbsolutePath } from "../utils/path-resolver";
 
 export function registerCollectionCommands(
@@ -96,6 +96,17 @@ export function registerCollectionCommands(
       },
     ),
   );
+
+  vscode.commands.registerCommand("fileCollections.removeFile", async (fileItem: FileTreeItem) => {
+    if (!fileItem) {
+      return;
+    }
+
+    const relativePath = vscode.workspace.asRelativePath(fileItem.filePath);
+    await manager.removeFilesFromCollection(fileItem.collection.name, [relativePath]);
+
+    treeProvider.refresh();
+  });
 
   context.subscriptions.push(
     vscode.commands.registerCommand("fileCollections.refresh", () => {
